@@ -19,6 +19,7 @@ html {
 }
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--cream);
   color: var(--ink);
   font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
@@ -248,6 +249,108 @@ button {
 section {
   padding: 100px 0;
 }
+.wave-top {
+  position: relative;
+  isolation: isolate;
+}
+.wave-top::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -56px;
+  left: -5vw;
+  width: 110vw;
+  height: 90px;
+  border-radius: 62% 38% 0 0 / 88% 68% 0 0;
+  background: var(--wave-color);
+  transform: rotate(-1deg);
+  transform-origin: center bottom;
+}
+.wave-mist {
+  --wave-color: var(--mist);
+}
+.wave-cream {
+  --wave-color: var(--cream);
+}
+.wave-soft-green {
+  --wave-color: #e9f4ed;
+}
+.wave-contact {
+  --wave-color: #eef8fb;
+}
+.wave-mist::before {
+  border-radius: 74% 26% 0 0 / 100% 58% 0 0;
+  transform: rotate(-1.5deg);
+}
+.wave-rise-right::before {
+  left: -22vw;
+  width: 126vw;
+  height: 108px;
+  border-radius: 28% 72% 0 0 / 52% 100% 0 0;
+  transform: rotate(1deg);
+}
+.wave-drift-left::before {
+  left: -2vw;
+  width: 118vw;
+  height: 78px;
+  border-radius: 78% 22% 0 0 / 100% 62% 0 0;
+  transform: rotate(-2deg);
+}
+.wave-arch::before {
+  top: -42px;
+  left: -10vw;
+  width: 120vw;
+  height: 80px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: none;
+}
+.wave-slope::before {
+  left: -12vw;
+  width: 122vw;
+  height: 96px;
+  border-radius: 20% 80% 0 0 / 46% 100% 0 0;
+  transform: rotate(0.8deg);
+}
+.wave-gentle::before {
+  top: -36px;
+  left: -8vw;
+  width: 116vw;
+  height: 66px;
+  border-radius: 58% 42% 0 0 / 72% 92% 0 0;
+  transform: rotate(-0.4deg);
+}
+.wave-top > .wrap {
+  position: relative;
+  z-index: 1;
+}
+.botanical {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: multiply;
+}
+.botanical-activities {
+  top: 45px;
+  right: -95px;
+  width: 420px;
+  opacity: 0.12;
+  transform: rotate(5deg);
+}
+.botanical-donate {
+  bottom: -85px;
+  left: -80px;
+  width: 330px;
+  opacity: 0.2;
+  transform: rotate(-8deg);
+}
+.botanical-contact {
+  right: -100px;
+  bottom: -100px;
+  width: 390px;
+  opacity: 0.13;
+  transform: rotate(8deg);
+}
 .section-head {
   display: flex;
   align-items: end;
@@ -430,64 +533,191 @@ section {
   font-weight: 900;
 }
 .donate {
-  background: var(--green);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(244, 186, 49, 0.2), transparent 25%),
+    radial-gradient(
+      circle at 92% 85%,
+      rgba(158, 220, 247, 0.2),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #286f4b 0%, #3f9167 55%, #55a88a 100%);
   color: #fff;
-  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 54px;
   margin: 0 auto 100px;
   width: min(1160px, calc(100% - 40px));
-  padding: 64px;
+  padding: 72px 68px;
+  box-shadow: 0 28px 70px rgba(20, 72, 54, 0.2);
+}
+.donate::before {
+  content: "";
+  position: absolute;
+  top: -85px;
+  left: -75px;
+  width: 210px;
+  height: 210px;
+  border: 28px solid rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+}
+.donate::after {
+  content: "";
+  position: absolute;
+  right: 38px;
+  bottom: 32px;
+  width: 94px;
+  height: 70px;
+  opacity: 0.52;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 2px,
+    transparent 3px
+  );
+  background-size: 18px 18px;
 }
 .donate-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 0.8fr;
-  gap: 50px;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: center;
 }
 .donate .kicker {
-  color: #9edcf7;
+  color: #ffe29a;
 }
-.points {
+.donate h2 {
+  margin: 0 0 18px;
+  font-size: clamp(36px, 4.4vw, 54px);
+  line-height: 1.35;
+}
+.donate p:not(.kicker) {
+  max-width: 470px;
+  color: rgba(255, 255, 255, 0.78);
+}
+.donation-options {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
-.point {
-  display: flex;
+.donation-amount {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: flex-start;
-  padding: 16px 28px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 8px;
+  min-height: 68px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: #fffdf8;
+  color: var(--green);
+  box-shadow: 0 12px 28px rgba(5, 49, 39, 0.17);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.donation-amount:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(5, 49, 39, 0.2);
+}
+.donation-amount > span {
+  font-size: 12px;
+  font-weight: 800;
+}
+.donation-amount > span:last-child {
+  font-size: 18px;
+}
+.donation-amount strong {
+  font-size: 25px;
+  line-height: 1;
+  text-align: center;
+}
+.donation-amount small {
+  margin-left: 2px;
+  font-size: 12px;
+}
+.donation-other {
+  grid-column: 1 / -1;
+  padding: 10px 0 0;
+  color: #fff;
+  font-size: 14px;
   font-weight: 900;
-  text-align: left;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.38);
+  text-underline-offset: 6px;
 }
 .contact {
-  background: #eff8fb;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(244, 186, 49, 0.18),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 8% 86%,
+      rgba(74, 167, 216, 0.14),
+      transparent 26%
+    ),
+    linear-gradient(135deg, #eef8fb 0%, #fffdf8 100%);
+}
+.contact .wrap {
+  position: relative;
+  z-index: 1;
+}
+.contact .kicker {
+  color: var(--orange);
 }
 .social-section {
   background: var(--cream);
 }
 .contact-form {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 22px;
-  padding: 28px 30px;
-  border-radius: 26px;
-  background: var(--green);
+  padding: 34px 38px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--ink), var(--green));
   color: #fff;
-  box-shadow: var(--shadow);
+  box-shadow: 0 22px 50px rgba(20, 72, 54, 0.18);
+}
+.contact-form::after {
+  content: "";
+  position: absolute;
+  top: -25px;
+  right: 180px;
+  width: 120px;
+  height: 120px;
+  border: 22px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+.contact-form > * {
+  position: relative;
+  z-index: 1;
 }
 .contact-form strong,
 .contact-form span {
   display: block;
 }
 .contact-form strong {
-  font-size: 22px;
+  margin-bottom: 3px;
+  font-size: 25px;
 }
 .contact-form span {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.74);
   font-size: 14px;
+}
+.contact-form .btn {
+  background: #fffdf8;
+  box-shadow: 0 10px 26px rgba(5, 49, 39, 0.18);
 }
 .contact-grid {
   display: grid;
@@ -723,6 +953,25 @@ section {
   }
 }
 @media (max-width: 650px) {
+  .wave-top::before {
+    top: -34px;
+    height: 58px;
+  }
+  .botanical-activities {
+    top: 110px;
+    right: -100px;
+    width: 260px;
+    opacity: 0.08;
+  }
+  .botanical-donate {
+    bottom: -45px;
+    left: -70px;
+    width: 220px;
+    opacity: 0.12;
+  }
+  .botanical-contact {
+    display: none;
+  }
   .header {
     position: fixed;
     right: 0;
@@ -817,6 +1066,9 @@ section {
   .donate {
     padding: 38px 24px;
     border-radius: 34px;
+  }
+  .donation-options {
+    grid-template-columns: 1fr;
   }
   .footer-main {
     grid-template-columns: 1fr;
