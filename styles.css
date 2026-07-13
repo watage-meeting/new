@@ -463,6 +463,32 @@ section {
 .contact {
   background: #eff8fb;
 }
+.social-section {
+  background: var(--cream);
+}
+.contact-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+  padding: 28px 30px;
+  border-radius: 26px;
+  background: var(--green);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.contact-form strong,
+.contact-form span {
+  display: block;
+}
+.contact-form strong {
+  font-size: 22px;
+}
+.contact-form span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+}
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -754,6 +780,14 @@ section {
   .section-head {
     align-items: start;
     flex-direction: column;
+  }
+  .contact-form {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 24px;
+  }
+  .contact-form .btn {
+    width: 100%;
   }
   .featured-news {
     grid-template-columns: 1fr;
