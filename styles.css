@@ -697,17 +697,41 @@ section {
   }
 }
 @media (max-width: 650px) {
+  .header {
+    position: fixed;
+    right: 0;
+    left: 0;
+    background: transparent;
+    border-bottom: 0;
+    backdrop-filter: none;
+  }
   .wrap {
     width: min(100% - 28px, 1160px);
   }
-  .brand img {
-    width: 120px;
+  .brand {
+    display: none;
   }
   .nav {
-    height: 72px;
+    height: 64px;
+    justify-content: flex-end;
   }
   .navlinks {
-    top: 72px;
+    top: 64px;
+    right: 14px;
+    left: 14px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+  .menu {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 253, 248, 0.96);
+    color: var(--ink);
+    box-shadow: 0 8px 24px rgba(20, 72, 54, 0.16);
   }
   .hero {
     padding: 45px 0 70px;
