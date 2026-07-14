@@ -7,9 +7,20 @@
   --orange: #ef8d20;
   --mist: #f1f8f3;
   --cream: #fffdf8;
-  --line: #d9e9de;
-  --muted: #60756f;
-  --shadow: 0 18px 55px rgba(20, 72, 54, 0.1);
+  --line: #e4eee7;
+  --muted: #5f7570;
+  --shadow: 0 18px 55px rgba(20, 72, 54, 0.08);
+  --shadow-soft: 0 10px 30px rgba(20, 72, 54, 0.07);
+  --radius-card: 28px;
+  --radius-card-sm: 24px;
+  --space-xs: 12px;
+  --space-sm: 20px;
+  --space-md: 32px;
+  --space-lg: 48px;
+  --space-xl: 88px;
+  --font-display:
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
+    sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -22,20 +33,10 @@ body {
   overflow-x: hidden;
   background: var(--cream);
   color: var(--ink);
-  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-  line-height: 1.8;
-  letter-spacing: 0.02em;
-}
-body:before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.22;
-  background-image: radial-gradient(#79b28e 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: linear-gradient(to bottom, #000, transparent 38%);
-  z-index: -1;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
 }
 a {
   text-decoration: none;
@@ -85,7 +86,7 @@ button {
   align-items: center;
   gap: 25px;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
 }
 .navlinks a {
   position: relative;
@@ -114,7 +115,7 @@ button {
   min-height: 52px;
   padding: 0 24px;
   border: 1px solid transparent;
-  font-weight: 900;
+  font-weight: 700;
   transition: 0.25s;
   cursor: pointer;
 }
@@ -149,8 +150,27 @@ button {
   font-size: 28px;
 }
 .hero {
+  position: relative;
   padding: 74px 0 90px;
   overflow: hidden;
+}
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: 700;
+}
+.hero-vertical {
+  position: absolute;
+  top: 4px;
+  right: -34px;
+  color: var(--green);
+  font-size: 14px;
+  letter-spacing: 0.42em;
+  opacity: 0.55;
 }
 .hero-grid {
   display: grid;
@@ -162,6 +182,7 @@ button {
   align-content: center;
 }
 .hero-copy {
+  position: relative;
   grid-area: copy;
   align-self: end;
 }
@@ -172,8 +193,8 @@ button {
 .kicker {
   color: var(--sky);
   font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.24em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   margin: 0 0 14px;
 }
@@ -183,13 +204,14 @@ button {
 .hero h1,
 .page-hero h1 {
   font-size: clamp(52px, 7vw, 88px);
+  font-weight: 900;
   line-height: 1.08;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
   margin: 0 0 24px;
 }
 .hero .sub {
   font-size: 23px;
-  font-weight: 900;
+  font-weight: 700;
   margin: 0 0 16px;
 }
 .lead {
@@ -226,7 +248,7 @@ button {
   padding: 20px 24px;
   border-radius: 22px;
   box-shadow: var(--shadow);
-  font-weight: 900;
+  font-weight: 700;
 }
 .float-card small {
   display: block;
@@ -243,113 +265,282 @@ button {
   place-items: center;
   border-radius: 50%;
   background: var(--yellow);
-  font-weight: 900;
+  font-weight: 700;
   transform: rotate(7deg);
 }
-section {
-  padding: 100px 0;
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
 }
-.wave-top {
+section {
+  padding: var(--space-xl) 0;
+}
+/* Single restrained divider: one arc shape, flip + color modifiers for variety */
+.divider {
   position: relative;
   isolation: isolate;
 }
-.wave-top::before {
+.divider::before {
   content: "";
   position: absolute;
   z-index: -1;
-  top: -56px;
-  left: -5vw;
-  width: 110vw;
-  height: 90px;
-  border-radius: 62% 38% 0 0 / 88% 68% 0 0;
-  background: var(--wave-color);
-  transform: rotate(-1deg);
+  top: -46px;
+  left: -6vw;
+  width: 112vw;
+  height: 84px;
+  border-radius: 62% 38% 0 0 / 100% 100% 0 0;
+  background: var(--divider-color, var(--mist));
   transform-origin: center bottom;
 }
-.wave-mist {
-  --wave-color: var(--mist);
+.divider-flip::before {
+  transform: scaleX(-1);
 }
-.wave-cream {
-  --wave-color: var(--cream);
+.divider-mist {
+  --divider-color: var(--mist);
 }
-.wave-soft-green {
-  --wave-color: #e9f4ed;
+.divider-cream {
+  --divider-color: var(--cream);
 }
-.wave-contact {
-  --wave-color: #eef8fb;
+.divider-green {
+  --divider-color: #e9f4ed;
 }
-.wave-mist::before {
-  border-radius: 74% 26% 0 0 / 100% 58% 0 0;
-  transform: rotate(-1.5deg);
+.divider-sky {
+  --divider-color: #eef8fb;
 }
-.wave-rise-right::before {
-  left: -22vw;
-  width: 126vw;
-  height: 108px;
-  border-radius: 28% 72% 0 0 / 52% 100% 0 0;
-  transform: rotate(1deg);
-}
-.wave-drift-left::before {
-  left: -2vw;
-  width: 118vw;
-  height: 78px;
-  border-radius: 78% 22% 0 0 / 100% 62% 0 0;
-  transform: rotate(-2deg);
-}
-.wave-arch::before {
-  top: -42px;
-  left: -10vw;
-  width: 120vw;
-  height: 80px;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  transform: none;
-}
-.wave-slope::before {
-  left: -12vw;
-  width: 122vw;
-  height: 96px;
-  border-radius: 20% 80% 0 0 / 46% 100% 0 0;
-  transform: rotate(0.8deg);
-}
-.wave-gentle::before {
-  top: -36px;
-  left: -8vw;
-  width: 116vw;
-  height: 66px;
-  border-radius: 58% 42% 0 0 / 72% 92% 0 0;
-  transform: rotate(-0.4deg);
-}
-.wave-top > .wrap {
+.divider > .wrap {
   position: relative;
   z-index: 1;
 }
+/* Decorative background shapes — organic blobs, rings, dot grids */
+.hero::before,
+.hero::after,
+.news::before,
+.news::after,
+#activities::before,
+#activities::after,
+.about-strip::before,
+.about-strip::after,
+.message-section::before,
+.message-section::after,
+.page-hero::before,
+.page-hero::after,
+.join-section::before,
+.contact::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::before {
+  top: -80px;
+  right: -100px;
+  width: 480px;
+  height: 400px;
+  border-radius: 58% 42% 68% 32% / 48% 52% 38% 62%;
+  background: linear-gradient(
+    145deg,
+    rgba(214, 236, 222, 0.75),
+    rgba(233, 244, 237, 0.35)
+  );
+}
+.hero::after {
+  bottom: 40px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  opacity: 0.45;
+  background-image: radial-gradient(
+    circle,
+    rgba(47, 123, 82, 0.14) 2px,
+    transparent 3px
+  );
+  background-size: 22px 22px;
+}
+.news::before {
+  top: -60px;
+  left: -120px;
+  width: 420px;
+  height: 360px;
+  border-radius: 65% 35% 52% 48% / 42% 58% 42% 58%;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(214, 236, 222, 0.45)
+  );
+}
+.news::after {
+  top: auto;
+  bottom: 60px;
+  right: -40px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 32px solid rgba(214, 236, 222, 0.55);
+  background: transparent;
+}
+#activities {
+  position: relative;
+  overflow: hidden;
+}
+#activities::before {
+  top: 80px;
+  left: -80px;
+  width: 340px;
+  height: 280px;
+  border-radius: 42% 58% 63% 37% / 55% 45% 55% 45%;
+  background: rgba(233, 244, 237, 0.85);
+}
+#activities::after {
+  bottom: -40px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 38% 62% 48% 52% / 60% 40% 60% 40%;
+  background: linear-gradient(
+    200deg,
+    rgba(214, 236, 222, 0.6),
+    rgba(255, 253, 248, 0.2)
+  );
+}
+.about-strip {
+  position: relative;
+  overflow: hidden;
+  background: #e9f4ed;
+}
+.about-strip::before {
+  top: -50px;
+  right: -80px;
+  width: 380px;
+  height: 320px;
+  border-radius: 55% 45% 60% 40% / 50% 50% 50% 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+.about-strip::after {
+  bottom: 30px;
+  left: -50px;
+  width: 180px;
+  height: 180px;
+  opacity: 0.5;
+  background-image: radial-gradient(
+    circle,
+    rgba(47, 123, 82, 0.12) 2px,
+    transparent 3px
+  );
+  background-size: 20px 20px;
+}
+.message-section {
+  position: relative;
+  overflow: hidden;
+  background: #e9f4ed;
+}
+.message-section::before {
+  top: -30px;
+  left: 50%;
+  width: 500px;
+  height: 400px;
+  transform: translateX(-60%);
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.message-section::after {
+  bottom: -60px;
+  right: 8%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 24px solid rgba(214, 236, 222, 0.5);
+  background: transparent;
+}
+.page-hero::before {
+  top: -40px;
+  left: -100px;
+  width: 400px;
+  height: 340px;
+  border-radius: 58% 42% 65% 35% / 50% 50% 50% 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+.page-hero::after {
+  bottom: -30px;
+  right: -50px;
+  width: 240px;
+  height: 240px;
+  border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+  background: rgba(214, 236, 222, 0.5);
+}
+.join-section {
+  position: relative;
+  overflow: hidden;
+}
+.join-section::before {
+  top: 40px;
+  right: -70px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 28px solid rgba(233, 244, 237, 0.8);
+  background: transparent;
+}
+.contact::before {
+  top: -40px;
+  left: -80px;
+  width: 320px;
+  height: 280px;
+  border-radius: 55% 45% 60% 40% / 48% 52% 48% 52%;
+  background: rgba(255, 255, 255, 0.6);
+}
+.section-head .kicker::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background-image: radial-gradient(circle, var(--green) 2px, transparent 3px);
+  background-size: 8px 6px;
+  opacity: 0.35;
+}
+/* Single decorative motif: dandelion botanicals, capped per page, consistent softness */
 .botanical {
   position: absolute;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   user-select: none;
+  opacity: 0.22;
   mix-blend-mode: multiply;
 }
-.botanical-activities {
-  top: 45px;
-  right: -95px;
-  width: 420px;
-  opacity: 0.12;
-  transform: rotate(5deg);
-}
 .botanical-donate {
-  bottom: -85px;
-  left: -80px;
-  width: 330px;
-  opacity: 0.2;
+  z-index: 0;
+  bottom: -20px;
+  left: 10px;
+  width: 320px;
+  opacity: 0.4;
+  mix-blend-mode: screen;
   transform: rotate(-8deg);
 }
-.botanical-contact {
-  right: -100px;
-  bottom: -100px;
-  width: 390px;
-  opacity: 0.13;
+.botanical-hero {
+  z-index: 0;
+  bottom: -10px;
+  left: 20px;
+  width: 300px;
+  opacity: 0.32;
+  transform: rotate(-9deg);
+}
+.botanical-page-hero {
+  top: -10px;
+  right: 20px;
+  width: 300px;
+  opacity: 0.3;
   transform: rotate(8deg);
+}
+.botanical-news {
+  top: 20px;
+  bottom: auto;
+  right: clamp(12px, 3vw, 48px);
+  width: 260px;
+  opacity: 0.38;
+  transform: rotate(6deg);
 }
 .section-head {
   display: flex;
@@ -370,16 +561,27 @@ section {
   color: var(--muted);
 }
 .news {
+  position: relative;
+  overflow: hidden;
   background: var(--mist);
+}
+.news > .wrap {
+  position: relative;
+  z-index: 1;
+}
+.news-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
 }
 .featured-news {
   display: grid;
   grid-template-columns: 340px 1fr;
-  border: 2px solid var(--orange);
-  border-radius: 28px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   background: #fff;
   box-shadow: var(--shadow);
+  border-top: 4px solid var(--orange);
 }
 .featured-news img {
   width: 100%;
@@ -405,7 +607,7 @@ section {
   background: #e7f4e8;
   color: var(--green);
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .badge.orange {
   background: #fff2df;
@@ -442,23 +644,28 @@ section {
   color: var(--green);
   padding: 11px 26px;
   border-radius: 999px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .bento {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, 360px);
-  gap: 20px;
+  gap: 24px;
 }
 .bento article {
   position: relative;
   overflow: hidden;
   min-height: 0;
-  border-radius: 30px;
+  border-radius: var(--radius-card);
   background: #e7f2ed;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
-.bento .big {
-  grid-row: auto;
+.bento article:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
 }
 .bento article > img {
   position: absolute;
@@ -479,6 +686,22 @@ section {
   border-radius: 18px;
   backdrop-filter: blur(8px);
 }
+.card-no {
+  position: absolute;
+  top: -19px;
+  left: 20px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 18px rgba(20, 72, 54, 0.28);
+}
 .caption h3 {
   margin: 0;
   font-size: 20px;
@@ -487,9 +710,6 @@ section {
   margin: 4px 0 0;
   font-size: 13px;
   color: var(--muted);
-}
-.about-strip {
-  background: #e9f4ed;
 }
 .home-about {
   padding-bottom: 48px;
@@ -512,12 +732,13 @@ section {
 .about-identity-label {
   color: #aee0f7;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 .about-identity strong {
   font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
   line-height: 1.5;
 }
 .about-identity > span:last-child {
@@ -526,11 +747,11 @@ section {
 }
 .quote {
   padding: 46px;
-  border-radius: 36px;
+  border-radius: var(--radius-card);
   background: var(--green);
   color: #fff;
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .donate {
   position: relative;
@@ -545,7 +766,7 @@ section {
     linear-gradient(135deg, #286f4b 0%, #3f9167 55%, #55a88a 100%);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 54px;
+  border-radius: 48px;
   margin: 0 auto 100px;
   width: min(1160px, calc(100% - 40px));
   padding: 72px 68px;
@@ -642,7 +863,7 @@ section {
   padding: 10px 0 0;
   color: #fff;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   text-align: center;
   text-decoration: underline;
   text-decoration-color: rgba(255, 255, 255, 0.38);
@@ -822,8 +1043,14 @@ section {
   color: rgba(255, 255, 255, 0.55);
 }
 .page-hero {
+  position: relative;
+  overflow: hidden;
   padding: 85px 0;
   background: linear-gradient(135deg, #eff8f2, #edf8fd);
+}
+.page-hero .wrap {
+  position: relative;
+  z-index: 1;
 }
 .page-hero h1 {
   font-size: clamp(45px, 6vw, 72px);
@@ -951,25 +1178,43 @@ section {
   .featured-news {
     grid-template-columns: 280px 1fr;
   }
+  .hero-vertical {
+    font-size: 12px;
+    opacity: 0.4;
+  }
 }
 @media (max-width: 650px) {
-  .wave-top::before {
-    top: -34px;
-    height: 58px;
+  .divider::before {
+    top: -28px;
+    height: 52px;
   }
-  .botanical-activities {
-    top: 110px;
-    right: -100px;
-    width: 260px;
-    opacity: 0.08;
+  .botanical-hero {
+    bottom: auto;
+    top: 6px;
+    left: 10px;
+    width: 190px;
+    opacity: 0.24;
   }
   .botanical-donate {
-    bottom: -45px;
-    left: -70px;
-    width: 220px;
-    opacity: 0.12;
+    bottom: -10px;
+    left: 6px;
+    width: 200px;
+    opacity: 0.16;
   }
-  .botanical-contact {
+  .botanical-news {
+    top: 8px;
+    right: 8px;
+    width: 170px;
+    opacity: 0.3;
+  }
+  .card-no {
+    top: -15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+  .hero-vertical {
     display: none;
   }
   .header {
@@ -1095,29 +1340,26 @@ section {
   margin-top: 44px;
 }
 .activity-detail {
+  position: relative;
   display: flex;
   min-height: 0;
   flex-direction: column;
-  border-radius: 34px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 .activity-detail:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(20, 72, 54, 0.16);
-}
-.activity-detail:nth-child(4n + 2),
-.activity-detail:nth-child(4n + 3) {
-  background: var(--mist);
+  box-shadow: var(--shadow);
 }
 .activity-detail img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
@@ -1133,7 +1375,7 @@ section {
 }
 .activity-no {
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.18em;
   color: var(--sky);
 }
@@ -1154,28 +1396,16 @@ section {
 }
 .principle {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding: 36px;
-  border-radius: 26px;
+  border-radius: var(--radius-card-sm);
   background: #fff;
   border: 1px solid var(--line);
-}
-.principle:before {
-  content: attr(data-no);
-  position: absolute;
-  right: 18px;
-  top: 0;
-  font:
-    900 80px/1 Inter,
-    sans-serif;
-  color: #eef5f0;
-}
-.principle h3,
-.principle p {
-  position: relative;
+  box-shadow: var(--shadow-soft);
 }
 .principle h3 {
-  font-size: 23px;
+  font-size: 22px;
+  margin: 6px 0 10px;
 }
 .principle p {
   color: var(--muted);
@@ -1192,15 +1422,20 @@ section {
   border-radius: 36px;
   background: transparent;
 }
-.message-section {
-  background: #e9f4ed;
+.message-section .wrap {
+  position: relative;
+  z-index: 1;
 }
 .home-message {
   padding-top: 0;
 }
+.message-layout {
+  display: flex;
+  justify-content: center;
+}
 .message-card {
   max-width: 900px;
-  margin: auto;
+  margin: 0;
   padding: 58px;
   border-radius: 38px;
   background: #fff;
@@ -1219,15 +1454,20 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  align-items: start;
 }
 .join-card {
+  position: relative;
+  overflow: visible;
   padding: 38px;
-  border-radius: 28px;
+  border-radius: var(--radius-card-sm);
   border: 1px solid var(--line);
   background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 .join-card h3 {
-  font-size: 25px;
+  font-size: 24px;
+  margin-top: 8px;
 }
 .join-card ul {
   padding-left: 20px;
@@ -1255,10 +1495,13 @@ section {
   gap: 18px;
 }
 .care-group {
+  position: relative;
+  overflow: visible;
   padding: 30px;
-  border-radius: 25px;
+  border-radius: var(--radius-card-sm);
   background: #fff;
   border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
 }
 .care-group strong {
   display: block;
@@ -1286,7 +1529,7 @@ section {
   background: #fff;
   border: 1px solid var(--line);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
 }
 @media (max-width: 850px) {
   .bento,
@@ -1298,10 +1541,7 @@ section {
     grid-template-columns: 1fr;
   }
   .bento {
-    grid-template-rows: repeat(4, 320px);
-  }
-  .bento .big {
-    grid-column: auto;
+    grid-template-rows: repeat(4, 300px);
   }
   .activity-detail-copy {
     padding: 30px 26px 34px;
@@ -1314,5 +1554,29 @@ section {
   }
   .message-card {
     padding: 38px 25px;
+  }
+}
+@media (max-width: 650px) {
+  .news::before {
+    width: 260px;
+    height: 220px;
+    top: -40px;
+    left: -80px;
+  }
+  .news::after {
+    width: 180px;
+    height: 180px;
+    bottom: 40px;
+    right: -30px;
+    border-width: 22px;
+  }
+  .news-actions .btn {
+    width: 100%;
+  }
+  .botanical-page-hero {
+    top: -6px;
+    right: 8px;
+    width: 190px;
+    opacity: 0.22;
   }
 }

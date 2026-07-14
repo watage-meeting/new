@@ -8,6 +8,12 @@
       content="高知でつながる、ヤングケアラー・若者ケアラーの居場所"
     />
     <title>わたげミーティング｜ひとりじゃないよ。</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -45,8 +51,17 @@
     </header>
     <main>
       <section class="hero">
+        <img
+          class="botanical botanical-hero"
+          src="assets/dandelion-stem.png"
+          alt=""
+          aria-hidden="true"
+        />
         <div class="wrap hero-grid">
           <div class="hero-copy reveal">
+            <span class="vertical-text hero-vertical" aria-hidden="true"
+              >わたげのように、そっと。</span
+            >
             <p class="kicker">Watage Meeting · Kochi</p>
             <h1>ひとり<br /><span class="nowrap">じゃないよ。</span></h1>
             <p class="sub">高知でつながる<br />ヤングケアラーの居場所</p>
@@ -71,14 +86,19 @@
           </div>
         </div>
       </section>
-      <section class="news wave-top wave-mist" id="news">
+      <section class="news divider divider-mist" id="news">
+        <img
+          class="botanical botanical-news"
+          src="assets/dandelion-stem.png"
+          alt=""
+          aria-hidden="true"
+        />
         <div class="wrap">
-          <div class="section-head reveal">
+          <div class="section-head news-heading reveal">
             <div>
               <p class="kicker">News &amp; Events</p>
               <h2>お知らせ・イベント</h2>
             </div>
-            <a class="btn btn-outline" href="news.html">一覧を見る →</a>
           </div>
           <article class="featured-news reveal">
             <img src="assets/breathe.png" alt="窓辺でひと息つく若者" />
@@ -112,15 +132,12 @@
               ><span>→</span></a
             >
           </div>
+          <div class="news-actions reveal">
+            <a class="btn btn-outline" href="news.html">お知らせ一覧を見る →</a>
+          </div>
         </div>
       </section>
-      <section class="wave-top wave-cream wave-rise-right" id="activities">
-        <img
-          class="botanical botanical-activities"
-          src="assets/seeds-drift-a.png"
-          alt=""
-          aria-hidden="true"
-        />
+      <section class="divider divider-cream divider-flip" id="activities">
         <div class="wrap">
           <div class="section-head reveal">
             <div>
@@ -132,12 +149,13 @@
             </p>
           </div>
           <div class="bento">
-            <article class="big reveal">
+            <article class="reveal">
               <img
                 src="assets/gathering.png"
                 alt="カードゲームを楽しむ交流会"
               />
               <div class="caption">
+                <span class="card-no" aria-hidden="true">01</span>
                 <h3>つどい・交流会</h3>
                 <p>同じ経験をもつ仲間と、話したり遊んだり。</p>
               </div>
@@ -145,6 +163,7 @@
             <article class="reveal">
               <img src="assets/breathe.png" alt="ひと息つける静かな居場所" />
               <div class="caption">
+                <span class="card-no" aria-hidden="true">02</span>
                 <h3>ひと息つける居場所を。</h3>
                 <p>言いたくないことは言わなくても大丈夫。</p>
               </div>
@@ -152,6 +171,7 @@
             <article class="reveal">
               <img src="assets/workshop.png" alt="創作ワークショップ" />
               <div class="caption">
+                <span class="card-no" aria-hidden="true">03</span>
                 <h3>レクリエーション</h3>
                 <p>ただ楽しむ時間も大切に。</p>
               </div>
@@ -159,6 +179,7 @@
             <article class="reveal">
               <img src="assets/lecture.png" alt="地域で行う講演・講師派遣" />
               <div class="caption">
+                <span class="card-no" aria-hidden="true">04</span>
                 <h3>講演・講師派遣</h3>
                 <p>当事者の声と専門知識を、学校・企業・地域へ届けます。</p>
               </div>
@@ -166,9 +187,7 @@
           </div>
         </div>
       </section>
-      <section
-        class="about-strip home-about wave-top wave-soft-green wave-drift-left"
-      >
+      <section class="about-strip home-about divider divider-green">
         <div class="wrap about-grid">
           <div class="about-identity reveal">
             <span class="about-identity-label">Kochi-based community</span>
@@ -190,7 +209,7 @@
         </div>
       </section>
       <section class="message-section home-message">
-        <div class="wrap">
+        <div class="wrap message-layout">
           <div class="message-card reveal">
             <p class="kicker">Message</p>
             <h2>あなたへのメッセージ</h2>
@@ -205,7 +224,7 @@
           </div>
         </div>
       </section>
-      <section class="join-section wave-top wave-cream wave-arch">
+      <section class="join-section divider divider-cream divider-flip">
         <div class="wrap">
           <div class="section-head reveal">
             <div>
@@ -217,7 +236,8 @@
             </p>
           </div>
           <div class="join-grid">
-            <article class="join-card reveal">
+            <article class="join-card reveal" data-no="01">
+              <span class="card-no" aria-hidden="true">01</span>
               <p class="kicker">Join our team</p>
               <h3>活動メンバー募集中</h3>
               <p>
@@ -236,7 +256,8 @@
                 >まずは話を聞く →</a
               >
             </article>
-            <article class="join-card reveal">
+            <article class="join-card reveal" data-no="02">
+              <span class="card-no" aria-hidden="true">02</span>
               <p class="kicker">For organizations</p>
               <h3>企業・団体の皆さまへ</h3>
               <p>
@@ -314,13 +335,7 @@
           </div>
         </div>
       </section>
-      <section class="contact wave-top wave-contact wave-slope" id="contact">
-        <img
-          class="botanical botanical-contact"
-          src="assets/seeds-drift-b.png"
-          alt=""
-          aria-hidden="true"
-        />
+      <section class="contact divider divider-sky" id="contact">
         <div class="wrap">
           <div class="section-head reveal">
             <div>
@@ -346,7 +361,7 @@
           </div>
         </div>
       </section>
-      <section class="social-section wave-top wave-cream wave-gentle">
+      <section class="social-section divider divider-cream">
         <div class="wrap">
           <div class="section-head reveal">
             <div>
