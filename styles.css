@@ -21,6 +21,11 @@
   --font-display:
     "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
     sans-serif;
+  --arc-height: clamp(56px, 9vw, 88px);
+  --arc-cream-mist: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 88' preserveAspectRatio='none'%3E%3Crect width='1440' height='88' fill='%23fffdf8'/%3E%3Cpath d='M0,32 C280,64 560,20 840,52 C1080,34 1280,62 1440,42 L1440,88 L0,88 Z' fill='%23f1f8f3'/%3E%3C/svg%3E");
+  --arc-mist-cream: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 88' preserveAspectRatio='none'%3E%3Crect width='1440' height='88' fill='%23f1f8f3'/%3E%3Cpath d='M0,58 C300,22 580,72 860,38 C1100,18 1280,54 1440,32 L1440,88 L0,88 Z' fill='%23fffdf8'/%3E%3C/svg%3E");
+  --arc-cream-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 88' preserveAspectRatio='none'%3E%3Crect width='1440' height='88' fill='%23fffdf8'/%3E%3Cpath d='M0,56 C320,18 620,68 900,34 C1140,14 1320,52 1440,30 L1440,88 L0,88 Z' fill='%23e9f4ed'/%3E%3C/svg%3E");
+  --arc-mist-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 88' preserveAspectRatio='none'%3E%3Crect width='1440' height='88' fill='%23f1f8f3'/%3E%3Cpath d='M0,56 C320,18 620,68 900,34 C1140,14 1320,52 1440,30 L1440,88 L0,88 Z' fill='%23e9f4ed'/%3E%3C/svg%3E");
 }
 * {
   box-sizing: border-box;
@@ -277,48 +282,37 @@ h4 {
 section {
   padding: var(--space-xl) 0;
 }
-/* Single restrained divider: one arc shape, flip + color modifiers for variety */
-.divider {
-  position: relative;
-  isolation: isolate;
-}
-.divider::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: -46px;
-  left: -6vw;
-  width: 112vw;
-  height: 84px;
-  border-radius: 62% 38% 0 0 / 100% 100% 0 0;
-  background: var(--divider-color, var(--mist));
-  transform-origin: center bottom;
-}
-.divider-flip::before {
-  transform: scaleX(-1);
-}
-.divider-mist {
-  --divider-color: var(--mist);
-}
-.divider-cream {
-  --divider-color: var(--cream);
-}
-.divider-green {
-  --divider-color: #e9f4ed;
-}
-.divider-sky {
-  --divider-color: #eef8fb;
-}
+/* Section dividers — subtle arc on select sections, straight elsewhere */
 .divider > .wrap {
   position: relative;
   z-index: 1;
+}
+.divider-arc {
+  background-repeat: no-repeat;
+  background-size: 100% var(--arc-height);
+  background-position: top center;
+}
+.news.divider-arc,
+.page.divider-arc,
+.contact.divider-arc {
+  background-color: var(--mist);
+  background-image: var(--arc-cream-mist);
+}
+#activities.divider-arc {
+  background-image: var(--arc-mist-cream);
+}
+.home-about.divider-arc {
+  background-image: var(--arc-cream-green);
+}
+.about-strip.divider-arc:not(.home-about),
+.message-section.divider-arc {
+  background-image: var(--arc-mist-green);
 }
 /* Decorative background shapes — organic blobs, rings, dot grids */
 .hero::before,
 .hero::after,
 .news::before,
 .news::after,
-#activities::before,
 #activities::after,
 .about-strip::before,
 .about-strip::after,
@@ -326,7 +320,6 @@ section {
 .message-section::after,
 .page-hero::before,
 .page-hero::after,
-.join-section::before,
 .contact::before {
   content: "";
   position: absolute;
@@ -359,15 +352,15 @@ section {
   background-size: 22px 22px;
 }
 .news::before {
-  top: -60px;
-  left: -120px;
-  width: 420px;
-  height: 360px;
+  top: 120px;
+  left: -180px;
+  width: 360px;
+  height: 300px;
   border-radius: 65% 35% 52% 48% / 42% 58% 42% 58%;
   background: linear-gradient(
     160deg,
-    rgba(255, 255, 255, 0.7),
-    rgba(214, 236, 222, 0.45)
+    rgba(255, 255, 255, 0.55),
+    rgba(214, 236, 222, 0.28)
   );
 }
 .news::after {
@@ -383,14 +376,11 @@ section {
 #activities {
   position: relative;
   overflow: hidden;
+  background-color: var(--cream);
 }
-#activities::before {
-  top: 80px;
-  left: -80px;
-  width: 340px;
-  height: 280px;
-  border-radius: 42% 58% 63% 37% / 55% 45% 55% 45%;
-  background: rgba(233, 244, 237, 0.85);
+#activities > .wrap {
+  position: relative;
+  z-index: 1;
 }
 #activities::after {
   bottom: -40px;
@@ -407,7 +397,7 @@ section {
 .about-strip {
   position: relative;
   overflow: hidden;
-  background: #e9f4ed;
+  background-color: #e9f4ed;
 }
 .about-strip::before {
   top: -50px;
@@ -433,7 +423,7 @@ section {
 .message-section {
   position: relative;
   overflow: hidden;
-  background: #e9f4ed;
+  background-color: #e9f4ed;
 }
 .message-section::before {
   top: -30px;
@@ -472,23 +462,21 @@ section {
 .join-section {
   position: relative;
   overflow: hidden;
+  background-color: var(--cream);
 }
-.join-section::before {
-  top: 40px;
-  right: -70px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 28px solid rgba(233, 244, 237, 0.8);
-  background: transparent;
+.join-section > .wrap {
+  position: relative;
+  z-index: 1;
 }
 .contact::before {
-  top: -40px;
-  left: -80px;
-  width: 320px;
-  height: 280px;
+  top: auto;
+  bottom: 40px;
+  right: -60px;
+  left: auto;
+  width: 260px;
+  height: 220px;
   border-radius: 55% 45% 60% 40% / 48% 52% 48% 52%;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(214, 236, 222, 0.35);
 }
 .section-head .kicker::after {
   content: "";
@@ -542,12 +530,36 @@ section {
   opacity: 0.38;
   transform: rotate(6deg);
 }
+.botanical-join,
+.botanical-social {
+  top: clamp(8px, 2vw, 20px);
+  bottom: auto;
+  right: clamp(8px, 2vw, 36px);
+  width: clamp(160px, 22vw, 240px);
+  opacity: 0.3;
+  transform: rotate(8deg);
+}
+.botanical-activities {
+  top: clamp(12px, 3vw, 28px);
+  bottom: auto;
+  left: clamp(-20px, 2vw, 40px);
+  right: auto;
+  width: clamp(200px, 28vw, 340px);
+  opacity: 0.42;
+  transform: rotate(-4deg);
+}
 .section-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 30px;
   margin-bottom: 42px;
+  position: relative;
+  z-index: 1;
+}
+.section-head .kicker {
+  position: relative;
+  z-index: 1;
 }
 .section-head h2,
 .page h2 {
@@ -563,7 +575,7 @@ section {
 .news {
   position: relative;
   overflow: hidden;
-  background: var(--mist);
+  background-color: var(--mist);
 }
 .news > .wrap {
   position: relative;
@@ -632,6 +644,11 @@ section {
 .news-row:hover {
   background: #f8fcf9;
   padding-left: 32px;
+}
+.news-row .arrow {
+  color: var(--green);
+  font-weight: 700;
+  text-align: right;
 }
 .news-row.hidden {
   display: none;
@@ -718,45 +735,6 @@ section {
   display: flex;
   justify-content: flex-end;
   margin-top: 28px;
-}
-.about-gallery {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 52px;
-  padding-bottom: 12px;
-}
-.about-gallery figure {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 24px;
-  aspect-ratio: 4 / 3;
-  box-shadow: var(--shadow-soft);
-}
-.about-gallery figure:nth-child(2) {
-  transform: translateY(18px);
-}
-.about-gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-.about-gallery figure:hover img {
-  transform: scale(1.04);
-}
-.about-gallery figcaption {
-  position: absolute;
-  inset: auto 14px 14px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 700;
 }
 .bento article {
   position: relative;
@@ -862,14 +840,7 @@ section {
 .donate {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 8% 12%, rgba(244, 186, 49, 0.2), transparent 25%),
-    radial-gradient(
-      circle at 92% 85%,
-      rgba(158, 220, 247, 0.2),
-      transparent 28%
-    ),
-    linear-gradient(135deg, #286f4b 0%, #3f9167 55%, #55a88a 100%);
+  background: linear-gradient(135deg, #286f4b 0%, #3f9167 55%, #55a88a 100%);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 48px;
@@ -877,31 +848,6 @@ section {
   width: min(1160px, calc(100% - 40px));
   padding: 72px 68px;
   box-shadow: 0 28px 70px rgba(20, 72, 54, 0.2);
-}
-.donate::before {
-  content: "";
-  position: absolute;
-  top: -85px;
-  left: -75px;
-  width: 210px;
-  height: 210px;
-  border: 28px solid rgba(255, 255, 255, 0.06);
-  border-radius: 50%;
-}
-.donate::after {
-  content: "";
-  position: absolute;
-  right: 38px;
-  bottom: 32px;
-  width: 94px;
-  height: 70px;
-  opacity: 0.52;
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.8) 2px,
-    transparent 3px
-  );
-  background-size: 18px 18px;
 }
 .donate-grid {
   position: relative;
@@ -978,28 +924,23 @@ section {
 .contact {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 88% 14%,
-      rgba(244, 186, 49, 0.18),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 8% 86%,
-      rgba(74, 167, 216, 0.14),
-      transparent 26%
-    ),
-    linear-gradient(135deg, #eef8fb 0%, #fffdf8 100%);
+  background-color: var(--mist);
 }
 .contact .wrap {
   position: relative;
   z-index: 1;
 }
 .contact .kicker {
-  color: var(--orange);
+  color: var(--sky);
 }
 .social-section {
-  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--cream);
+}
+.social-section > .wrap {
+  position: relative;
+  z-index: 1;
 }
 .contact-form {
   position: relative;
@@ -1010,21 +951,11 @@ section {
   gap: 24px;
   margin-bottom: 22px;
   padding: 34px 38px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 30px;
-  background: linear-gradient(135deg, var(--ink), var(--green));
+  background: linear-gradient(135deg, #286f4b 0%, #3f9167 100%);
   color: #fff;
-  box-shadow: 0 22px 50px rgba(20, 72, 54, 0.18);
-}
-.contact-form::after {
-  content: "";
-  position: absolute;
-  top: -25px;
-  right: 180px;
-  width: 120px;
-  height: 120px;
-  border: 22px solid rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
+  box-shadow: var(--shadow);
 }
 .contact-form > * {
   position: relative;
@@ -1290,9 +1221,8 @@ section {
   }
 }
 @media (max-width: 650px) {
-  .divider::before {
-    top: -28px;
-    height: 52px;
+  :root {
+    --arc-height: clamp(44px, 10vw, 72px);
   }
   .botanical-hero {
     bottom: auto;
@@ -1312,6 +1242,19 @@ section {
     right: 8px;
     width: 170px;
     opacity: 0.3;
+  }
+  .botanical-join,
+  .botanical-social {
+    top: 6px;
+    right: 6px;
+    width: 140px;
+    opacity: 0.22;
+  }
+  .botanical-activities {
+    top: 8px;
+    left: -8px;
+    width: 180px;
+    opacity: 0.32;
   }
   .card-no {
     top: -15px;
@@ -1399,14 +1342,28 @@ section {
     padding: 26px;
   }
   .news-row {
-    grid-template-columns: 75px 1fr;
-    padding: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px 12px;
+    align-items: center;
+    padding: 16px 18px;
   }
   .news-row .date {
     display: none;
   }
+  .news-row strong {
+    font-size: 15px;
+    line-height: 1.5;
+    min-width: 0;
+  }
   .news-row .arrow {
-    display: none;
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .news-row:hover {
+    padding-left: 18px;
   }
   .contact-grid,
   .aims,
@@ -1643,12 +1600,8 @@ section {
   .principles,
   .story-grid,
   .join-grid,
-  .care-story,
-  .about-gallery {
+  .care-story {
     grid-template-columns: 1fr;
-  }
-  .about-gallery figure:nth-child(2) {
-    transform: none;
   }
   .bento {
     grid-template-rows: repeat(4, 300px);
