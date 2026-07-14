@@ -652,6 +652,112 @@ section {
   grid-template-rows: repeat(2, 360px);
   gap: 24px;
 }
+.activity-marquee {
+  position: relative;
+  overflow: hidden;
+  margin-top: 42px;
+  padding: 8px 0 18px;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.activity-marquee-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  animation: activity-marquee 48s linear infinite;
+}
+.activity-marquee:hover .activity-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes activity-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.activity-slide {
+  position: relative;
+  flex: 0 0 clamp(300px, 38vw, 440px);
+  height: clamp(240px, 28vw, 300px);
+  overflow: hidden;
+  border-radius: 28px;
+  background: #e7f2ed;
+  box-shadow: var(--shadow-soft);
+}
+.activity-slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.activity-slide-copy {
+  position: absolute;
+  inset: auto 16px 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+}
+.activity-slide-copy h3 {
+  margin: 6px 0 4px;
+  font-size: 18px;
+}
+.activity-slide-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.activity-marquee-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+.about-gallery {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 52px;
+  padding-bottom: 12px;
+}
+.about-gallery figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  aspect-ratio: 4 / 3;
+  box-shadow: var(--shadow-soft);
+}
+.about-gallery figure:nth-child(2) {
+  transform: translateY(18px);
+}
+.about-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.about-gallery figure:hover img {
+  transform: scale(1.04);
+}
+.about-gallery figcaption {
+  position: absolute;
+  inset: auto 14px 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
 .bento article {
   position: relative;
   overflow: hidden;
@@ -1537,11 +1643,19 @@ section {
   .principles,
   .story-grid,
   .join-grid,
-  .care-story {
+  .care-story,
+  .about-gallery {
     grid-template-columns: 1fr;
+  }
+  .about-gallery figure:nth-child(2) {
+    transform: none;
   }
   .bento {
     grid-template-rows: repeat(4, 300px);
+  }
+  .activity-slide {
+    flex-basis: min(78vw, 320px);
+    height: 220px;
   }
   .activity-detail-copy {
     padding: 30px 26px 34px;
@@ -1578,5 +1692,25 @@ section {
     right: 8px;
     width: 190px;
     opacity: 0.22;
+  }
+  .activity-marquee-actions {
+    justify-content: stretch;
+  }
+  .activity-marquee-actions .btn {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .activity-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .activity-marquee-track {
+    animation: none;
+  }
+  .activity-slide {
+    scroll-snap-align: start;
   }
 }
