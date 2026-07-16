@@ -4,16 +4,18 @@ const header = document.querySelector(".header");
 
 menu?.addEventListener("click", () => {
   const isOpen = nav?.classList.toggle("open") ?? false;
-  menu.textContent = isOpen ? "×" : "☰";
+  menu.classList.toggle("is-open", isOpen);
   menu.setAttribute("aria-expanded", String(isOpen));
+  menu.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニュー");
   header?.classList.remove("is-hidden");
 });
 
 nav?.querySelectorAll("a").forEach((link) =>
   link.addEventListener("click", () => {
     nav.classList.remove("open");
+    menu?.classList.remove("is-open");
     menu?.setAttribute("aria-expanded", "false");
-    if (menu) menu.textContent = "☰";
+    menu?.setAttribute("aria-label", "メニュー");
   }),
 );
 

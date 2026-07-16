@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -19,9 +19,14 @@
   <body>
     <header class="header">
       <div class="wrap nav">
-        <a class="brand" href="index.html"
-          ><img src="assets/logo-watage.png" alt="わたげミーティング"
-        /></a>
+        <a class="brand" href="index.html">
+          <img
+            class="brand-logo"
+            src="assets/logo-watage.png"
+            alt="わたげミーティング"
+          />
+          <span class="brand-wordmark" aria-hidden="true">/ わたげ</span>
+        </a>
         <nav class="navlinks">
           <a href="about.html">わたしたちについて</a
           ><a class="active" href="youngcarer.html">ヤングケアラーとは</a
@@ -41,7 +46,11 @@
           aria-label="メニュー"
           aria-expanded="false"
         >
-          ☰
+          <span class="menu-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </button>
       </div>
     </header>
@@ -181,7 +190,7 @@
           <div>
             <img
               class="footer-logo"
-              src="assets/logo-watage.png"
+              src="assets/logo-watage-footer.png"
               alt="わたげミーティング"
             />
             <p>高知から、やさしいつながりを。</p>
