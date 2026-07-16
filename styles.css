@@ -736,7 +736,7 @@ section {
   display: flex;
   gap: 28px;
   width: max-content;
-  animation: activity-marquee 32s linear infinite;
+  animation: activity-marquee 45s linear infinite;
 }
 .activity-marquee:hover .activity-marquee-track {
   animation-play-state: paused;
@@ -1381,6 +1381,14 @@ section {
   }
   .donate {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .donate-grid {
+    justify-items: center;
+  }
+  .donate-grid > div {
+    width: 100%;
   }
   .donate-grid > div:first-child {
     display: flex;
@@ -1392,9 +1400,15 @@ section {
   .donate p:not(.kicker) {
     text-align: center;
   }
+  .donate h2 .nowrap {
+    white-space: normal;
+  }
   .donate p:not(.kicker) {
     margin-left: auto;
     margin-right: auto;
+  }
+  .donation-options {
+    width: 100%;
   }
   .home-about-visual {
     justify-self: center;
@@ -1420,9 +1434,10 @@ section {
   }
   .botanical-donate {
     bottom: -10px;
-    left: 6px;
+    left: 50%;
     width: 200px;
-    opacity: 0.16;
+    opacity: 0.12;
+    transform: translateX(-50%) rotate(-8deg);
   }
   .botanical-news {
     top: 8px;
@@ -1628,9 +1643,18 @@ section {
     width: min(100% - 28px, 1160px);
     margin-left: auto;
     margin-right: auto;
-    padding: 38px 22px;
+    padding: 38px 20px;
     border-radius: 34px;
     text-align: center;
+  }
+  .donate-grid {
+    width: 100%;
+    margin: 0;
+    justify-items: center;
+  }
+  .donate-grid > div {
+    width: 100%;
+    max-width: 100%;
   }
   .donate-grid > div:first-child {
     display: flex;
@@ -1643,6 +1667,9 @@ section {
   .donate h2 {
     text-align: center;
   }
+  .donate h2 .nowrap {
+    white-space: normal;
+  }
   .donate p:not(.kicker) {
     max-width: 34em;
     margin-left: auto;
@@ -1650,18 +1677,41 @@ section {
     text-align: center;
   }
   .donation-options {
+    display: grid;
     grid-template-columns: 1fr;
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-items: stretch;
   }
   .donation-amount {
-    grid-template-columns: 3.2em 1fr 3.2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
     width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 14px 22px;
+    box-sizing: border-box;
+  }
+  .donation-amount > span:first-child,
+  .donation-amount > span:last-child {
+    flex: 0 0 2.75em;
   }
   .donation-amount > span:first-child {
     text-align: left;
   }
   .donation-amount > span:last-child {
     text-align: right;
+  }
+  .donation-amount strong {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .donation-other {
+    width: 100%;
+    text-align: center;
   }
   .footer-main {
     grid-template-columns: 1fr;
