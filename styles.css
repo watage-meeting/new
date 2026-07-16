@@ -849,7 +849,7 @@ section {
   display: flex;
   gap: 28px;
   width: max-content;
-  animation: activity-marquee 45s linear infinite;
+  animation: activity-marquee 50s linear infinite;
 }
 .activity-marquee:hover .activity-marquee-track {
   animation-play-state: paused;
