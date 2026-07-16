@@ -1743,8 +1743,24 @@ section {
     top: -18px;
   }
   .float-card {
-    left: -28px;
-    width: min(310px, calc(100% + 16px));
+    left: -18px;
+    right: auto;
+    bottom: 18px;
+    width: min(268px, calc(100% - 28px));
+    max-width: none;
+    padding: 11px 16px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    white-space: nowrap;
+    box-shadow: var(--shadow-soft);
+  }
+  .float-card small {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    white-space: normal;
   }
   .section-head {
     align-items: start;
